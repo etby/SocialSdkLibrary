@@ -10,8 +10,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.zfy.social:social-sdk-plugin:1.2.0'
-        classpath 'com.android.tools.build:gradle:3.5.3'
-        classpath 'com.novoda:bintray-release:0.9.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.novoda:bintray-release:0.9.2'
     }
 }
 
@@ -20,6 +20,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://dl.bintray.com/zfy/maven" }
+        maven { url "https://dl.bintray.cjetifierom/etby/android" }
         maven { url "https://dl.bintray.com/thelasterstar/maven/" }
     }
 }

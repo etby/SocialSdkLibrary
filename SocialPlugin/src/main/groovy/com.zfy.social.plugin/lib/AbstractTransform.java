@@ -93,16 +93,24 @@ public abstract class AbstractTransform extends Transform {
     }
 
 
-    // 遍历每文件夹
+    /**
+     * 遍历文件夹, 处理之后将整个文件夹拷贝到输出目录
+     * @param directoryInput
+     * @param provider
+     */
     private void onEachDirectory(DirectoryInput directoryInput, TransformOutputProvider provider) {
         if (directoryInput.getFile().isDirectory()) {
+            // 遍历文件
             UtilX.eachFile(directoryInput.getFile(), new Consumer<File>() {
                 @Override
                 public void accept(File file) {
                     if (file.isFile() && isAttentionFile(file.getName())) {
                         try {
+                            // 获取文件数据
                             byte[] bytes = ResourceGroovyMethods.getBytes(file);
+                            // 处理文件数据
                             byte[] code = TransformX.visitClass(bytes, onEachClassFile(file.getName()));
+                            // 将处理后的数据写入文件
                             FileOutputStream fos = new FileOutputStream(file.getParentFile().getAbsolutePath() + File.separator + file.getName());
                             fos.write(code);
                             fos.close();
@@ -113,6 +121,7 @@ public abstract class AbstractTransform extends Transform {
                 }
             });
         }
+        // 整体拷贝文件夹
         if (provider != null) {
             File file = provider.getContentLocation(directoryInput.getName(),
                     directoryInput.getContentTypes(),
@@ -126,7 +135,11 @@ public abstract class AbstractTransform extends Transform {
         }
     }
 
-    // 遍历所有 jar
+    /**
+     * 遍历所有 jar
+     * @param input
+     * @param provider
+     */
     private void onEachJar(JarInput input, TransformOutputProvider provider) {
         File file = input.getFile();
         if (!file.getAbsolutePath().endsWith("jar")) {
@@ -168,6 +181,8 @@ public abstract class AbstractTransform extends Transform {
             // 结束
             jarOutputStream.close();
             jarFile.close();
+
+            // 拷贝文件
             File dest = provider.getContentLocation(jarName + md5Name,
                     input.getContentTypes(), input.getScopes(), Format.JAR);
             FileUtils.copyFile(tmpFile, dest);

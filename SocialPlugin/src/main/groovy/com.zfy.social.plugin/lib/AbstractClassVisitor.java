@@ -60,7 +60,7 @@ public class AbstractClassVisitor extends ClassVisitor implements Opcodes, ScanC
     private MethodInfo methodInfo = new MethodInfo();
 
     public AbstractClassVisitor(ClassVisitor classVisitor) {
-        super(Opcodes.ASM5, classVisitor);
+        super(Opcodes.ASM7, classVisitor);
     }
 
     public void setMethodVisitorWatcher(ScanClassMethodVisitorWatcher methodVisitorWatcher) {
@@ -93,6 +93,8 @@ public class AbstractClassVisitor extends ClassVisitor implements Opcodes, ScanC
         methodInfo.desc = desc;
         methodInfo.signature = signature;
         methodInfo.exceptions = exceptions;
+
+        //  如果有设置特殊的方法处理器，则进行处理
         if (methodVisitorWatcher != null) {
             MethodVisitor visitor = methodVisitorWatcher.watch(methodVisitor, classInfo, methodInfo);
             if (visitor != null) {

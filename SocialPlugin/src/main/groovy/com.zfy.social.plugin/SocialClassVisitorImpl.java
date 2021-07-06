@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 /**
  * CreateAt : 2020-01-20
- * Describe : 访问 class 工具
+ * Describe : 访问 class com/zfy/social/core/SocialOptions$Builder 的工具
  *
  * @author chendong
  */
@@ -37,7 +37,9 @@ public class SocialClassVisitorImpl extends AbstractClassVisitor {
 
     @Override
     public MethodVisitor watch(MethodVisitor visitor, ClassInfo classInfo, MethodInfo methodInfo) {
+        // 针对特定类做处理
         if ("com/zfy/social/core/SocialOptions$Builder".equals(classInfo.name)) {
+            // 针对特定方法做处理
             if ("initConfigByAsm".equals(methodInfo.name)) {
                 UtilX.log("找到 SocialOptions$Builder initConfigByAsm");
                 return new SocialMethodVisitorImpl(visitor);
@@ -49,7 +51,7 @@ public class SocialClassVisitorImpl extends AbstractClassVisitor {
     static class SocialMethodVisitorImpl extends MethodVisitor {
 
         public SocialMethodVisitorImpl(MethodVisitor mv) {
-            super(Opcodes.ASM4, mv);
+            super(Opcodes.ASM7, mv);
         }
 
         @Override

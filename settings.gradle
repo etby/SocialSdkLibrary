@@ -1,6 +1,6 @@
-include ':app'
+//include ':app'
 include ':SocialPlugin'
-include ':SocialSdkCore'
+//include ':SocialSdkCore'
 //include ':SocialSdkWx'
 //include ':SocialSdkQq'
 //include ':SocialSdkWb'

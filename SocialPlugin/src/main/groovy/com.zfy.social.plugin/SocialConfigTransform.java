@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 /**
  * CreateAt : 2020-01-20
- * Describe :
+ * Describe : 针对特定类 com/zfy/social/core/SocialOptions$Builder.class 做处理
  *
  * @author chendong
  */

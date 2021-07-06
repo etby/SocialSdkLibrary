@@ -17,7 +17,7 @@ import java.util.function.Function;
 
 /**
  * CreateAt : 2020-01-20
- * Describe :
+ * Describe : 扫描所有类，将需要处理的类收集起来
  *
  * @author chendong
  */
@@ -37,6 +37,7 @@ public class ScanClassTransform extends AbstractTransform {
         return classVisitorFactory;
     }
 
+    // 对常见的类做了优化
     @Override
     protected boolean isAttentionFile(String name) {
         return super.isAttentionFile(name)
@@ -59,6 +60,10 @@ public class ScanClassTransform extends AbstractTransform {
         }
     }
 
+    /**
+     * 将继承{@see com/zfy/social/core/platform/PlatformFactory} 类的所有类收集起来,
+     * 在 {@link SocialClassVisitorImpl} 中会进行处理
+     */
     class ScanClassVisitor extends AbstractClassVisitor {
 
         public ScanClassVisitor(ClassVisitor classVisitor) {

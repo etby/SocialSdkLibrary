@@ -32,7 +32,7 @@ public class ClassVisitorImpl extends ClassVisitor implements Opcodes {
     private boolean isTargetClass;
 
     public ClassVisitorImpl(ClassVisitor classVisitor) {
-        super(Opcodes.ASM5, classVisitor);
+        super(Opcodes.ASM7, classVisitor);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ClassVisitorImpl extends ClassVisitor implements Opcodes {
     static class SocialPlatformMethodVisitorImpl extends MethodVisitor {
 
         public SocialPlatformMethodVisitorImpl(MethodVisitor mv) {
-            super(Opcodes.ASM4, mv);
+            super(Opcodes.ASM7, mv);
         }
 
         @Override
@@ -112,7 +112,7 @@ public class ClassVisitorImpl extends ClassVisitor implements Opcodes {
     static class SocialConfigMethodVisitorImpl extends MethodVisitor {
 
         public SocialConfigMethodVisitorImpl(MethodVisitor mv) {
-            super(Opcodes.ASM4, mv);
+            super(Opcodes.ASM7, mv);
         }
 
         @Override

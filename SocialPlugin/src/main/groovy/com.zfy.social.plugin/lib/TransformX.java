@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 /**
  * CreateAt : 2020-01-20
- * Describe :
+ * Describe : 转换字节码的工具类
  *
  * @author chendong
  */
@@ -23,15 +23,15 @@ public class TransformX {
      */
     public static boolean isNotAttentionClass(String name) {
         return !name.endsWith(".class")
-                || name.startsWith("R$")
-                || "R.class".equals(name)
-                || "BuildConfig.class".equals(name);
+            || name.startsWith("R$")
+            || "R.class".equals(name)
+            || "BuildConfig.class".equals(name);
     }
 
     /**
-     * @param superName  父类
+     * @param superName 父类
      * @param interfaces 接口
-     * @param target     目标类
+     * @param target 目标类
      * @return 判断是否是某个类/接口的子类
      */
     public static boolean isSubClass(String superName, String[] interfaces, String target) {
@@ -54,8 +54,8 @@ public class TransformX {
      */
     public static byte[] visitClass(byte[] bytes, Function<ClassWriter, ClassVisitor> mapper) {
         ClassReader classReader = new ClassReader(bytes);
-        ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
-        classReader.accept(mapper.apply(classWriter), ClassReader.EXPAND_FRAMES);
+        ClassWriter classWriter = new ClassWriter(classReader, 0);
+        classReader.accept(mapper.apply(classWriter), ClassReader.SKIP_FRAMES);
         return classWriter.toByteArray();
     }
 
